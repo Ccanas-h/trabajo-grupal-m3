@@ -1,24 +1,28 @@
 pipeline {
     agent any
         stages {
-        stage('Initialize'){
-            steps{
-                echo "Esta es el inicio"
-            }
-        }
         stage('Build') {
             steps {
                 sh 'mvn -B package'
-            
             }
         }
-            
-        stage('Test') {
+        stage('SonarQube analysis') {
             steps {
-                 sh "mvn clean verify" 
-            
+                script {
+                    sh "/var/jenkins_home/sonar/bin/sonar-scanner \
+                        -Dsonar.projectKey=projectKey \
+                        -Dsonar.projectName=projectName \
+                        -Dsonar.scm.disabled=true \
+                        -Dsonar.sources=. \
+                        -Dsonar.language=java \
+                        -Dsonar.java.binaries=./target/classes \
+                        -Dsonar.sourceEncoding=UTF-8 \
+                        -Dsonar.host.url=https://ae1a-186-105-120-165.ngrok-free.app \
+                        -Dsonar.exclusions=src/test/java/****/*.java \
+                        -Dsonar.login=squ_79146dd17e54d3df5f3e98170b18069c3c46de0b"
+                }
             }
-        } 
+        }
         stage("Publish to Nexus Repository Manager") {
             steps {
                 script {
@@ -32,24 +36,39 @@ pipeline {
                         nexusArtifactUploader(
                             nexusVersion: "nexus3",
                             protocol: "http",
-                            nexusUrl: "192.168.1.126:8081",
+                            nexusUrl: "https://a2b4-181-161-20-134.ngrok-free.app/",
                             groupId: pom.groupId,
                             version: pom.version,
-                            repository: "e5-m3-hosted",
-                            credentialsId: "NEXUS-ADMIN",
+                            repository: "grupo5-hosted",
+                            credentialsId: "0934e1b8-cc88-30fc-983d-4ddcc7476ca8",
                             artifacts: [
-                                [artifactId: pom.artifactId,
-                                        classifier: '',
-                                        file: artifactPath,
-                                        type: pom.packaging]
-                            ]
+                                    [artifactId: pom.artifactId,
+                                    classifier: '',
+                                    file: artifactPath,
+                                    type: pom.packaging]
+                                ]
                         );
                     } else {
                         error "*** File: ${artifactPath}, could not be found";
                     }
                 }
             }
-        
-            } 
-     }
+        }
+        }
+    post{
+    //     succeed {
+    //        slackSend channel: '#fundamentos-de-devops', token: "slack_token", color: 'good', , message: "${custom_msg()}", teamDomain: 'sustantivagrupo', tokenCredentialId: 'slack_token', username: 'Luis_Rivas'
+    //    }
+        failure{
+            slackSend channel: "#devops", token: "pNWA0uvG8p3yK9Xcra0oK7aJ", color: "danger", message: "${custom_msg()}", teamDomain: 'prueba-4vd5809', tokenCredentialId: 'slack_token', username: 'Luis_Rivas'
+        }
+    }
 }
+    def custom_msg() {
+        def JENKINS_URL= "localhost:8080"
+        def JOB_NAME = env.JOB_NAME
+        def BUILD_ID= env.BUILD_ID
+        def JENKINS_LOG= " FAILED: Job [${env.JOB_NAME}] Logs path: ${JENKINS_URL}/job/${JOB_NAME}/${BUILD_ID}/consoleText"
+        return JENKINS_LOG
+    }
+    
