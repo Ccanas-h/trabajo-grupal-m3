@@ -10,8 +10,8 @@ pipeline {
             steps {
                 script {
                     sh "/var/jenkins_home/sonar/bin/sonar-scanner \
-                        -Dsonar.projectKey=projectKey \
-                        -Dsonar.projectName=projectName \
+                        -Dsonar.projectKey=grupo-05 \
+                        -Dsonar.projectName=grupo-05 \
                         -Dsonar.scm.disabled=true \
                         -Dsonar.sources=. \
                         -Dsonar.language=java \
