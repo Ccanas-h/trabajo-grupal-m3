@@ -40,7 +40,7 @@ pipeline {
                             groupId: pom.groupId,
                             version: pom.version,
                             repository: "grupo5-hosted",
-                            credentialsId: "0934e1b8-cc88-30fc-983d-4ddcc7476ca8",
+                            credentialsId: "grupo_5",
                             artifacts: [
                                     [artifactId: pom.artifactId,
                                     classifier: '',
@@ -60,7 +60,7 @@ pipeline {
     //        slackSend channel: '#fundamentos-de-devops', token: "slack_token", color: 'good', , message: "${custom_msg()}", teamDomain: 'sustantivagrupo', tokenCredentialId: 'slack_token', username: 'Luis_Rivas'
     //    }
         failure{
-            slackSend channel: "#devops", token: "pNWA0uvG8p3yK9Xcra0oK7aJ", color: "danger", message: "${custom_msg()}", teamDomain: 'prueba-4vd5809', tokenCredentialId: 'slack_token', username: 'Luis_Rivas'
+            slackSend channel: "#devops", token: "pNWA0uvG8p3yK9Xcra0oK7aJ", color: "danger", message: "${custom_msg()}", teamDomain: 'prueba-4vd5809', username: 'Luis_Rivas'
         }
     }
 }
