@@ -36,7 +36,7 @@ pipeline {
                         nexusArtifactUploader(
                             nexusVersion: "nexus3",
                             protocol: "http",
-                            nexusUrl: "https://a2b4-181-161-20-134.ngrok-free.app/",
+                            nexusUrl: "https://a2b4-181-161-20-134.ngrok-free.app",
                             groupId: pom.groupId,
                             version: pom.version,
                             repository: "grupo5-hosted",
