@@ -35,11 +35,11 @@ pipeline {
                         echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
                         nexusArtifactUploader(
                             nexusVersion: "nexus3",
-                            protocol: "https",
-                            nexusUrl: "a2b4-181-161-20-134.ngrok-free.app",
+                            protocol: "http",
+                            nexusUrl: "localhost:8081",
                             groupId: pom.groupId,
                             version: pom.version,
-                            repository: "grupo5-hosted",
+                            repository: "pipeline-jenkinsfile-grupo5",
                             credentialsId: "grupo_5",
                             artifacts: [
                                     [artifactId: pom.artifactId,
