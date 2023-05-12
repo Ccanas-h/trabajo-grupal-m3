@@ -17,7 +17,7 @@ pipeline {
                         -Dsonar.language=java \
                         -Dsonar.java.binaries=./target/classes \
                         -Dsonar.sourceEncoding=UTF-8 \
-                        -Dsonar.host.url=http://localhost:9000 \
+                        -Dsonar.host.url=http://192.168.1.126:9000 \
                         -Dsonar.exclusions=src/test/java/****/*.java \
                         -Dsonar.login=sqa_772b104141245276d89d4f82c9f5c221365b71a6"
                 }
