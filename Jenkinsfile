@@ -56,11 +56,11 @@ pipeline {
         }
         }
     post{
-    //     succeed {
-    //        slackSend channel: '#fundamentos-de-devops', token: "slack_token", color: 'good', , message: "${custom_msg()}", teamDomain: 'sustantivagrupo', tokenCredentialId: 'slack_token', username: 'Luis_Rivas'
-    //    }
+        success {
+            slackSend channel: "#devops", token: "grupo_5_token_ultimate", color: 'good', message: "${custom_msg1()}", tokenCredentialId: 'grupo_5_token_ultimate', teamDomain: 'prueba-4vd5809', username: 'jenkins'
+        }
         failure{
-            slackSend channel: "#devops", token: "pNWA0uvG8p3yK9Xcra0oK7aJ", color: "danger", message: "${custom_msg()}", teamDomain: 'prueba-4vd5809', username: 'Luis_Rivas'
+            slackSend channel: "#devops", token: "grupo_5_token_ultimate", color: "danger", message: "${custom_msg()}", tokenCredentialId: 'grupo_5_token_ultimate', teamDomain: 'prueba-4vd5809', username: 'jenkins'
         }
     }
 }
@@ -69,6 +69,13 @@ pipeline {
         def JOB_NAME = env.JOB_NAME
         def BUILD_ID= env.BUILD_ID
         def JENKINS_LOG= " FAILED: Job [${env.JOB_NAME}] Logs path: ${JENKINS_URL}/job/${JOB_NAME}/${BUILD_ID}/consoleText"
+        return JENKINS_LOG
+    }
+    def custom_msg1() {
+        def JENKINS_URL= "localhost:8080"
+        def JOB_NAME = env.JOB_NAME
+        def BUILD_ID= env.BUILD_ID
+        def JENKINS_LOG= " SUCCESS: Job [${env.JOB_NAME}] Logs path: ${JENKINS_URL}/job/${JOB_NAME}/${BUILD_ID}/consoleText"
         return JENKINS_LOG
     }
     
