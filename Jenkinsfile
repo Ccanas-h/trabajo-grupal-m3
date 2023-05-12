@@ -10,16 +10,16 @@ pipeline {
             steps {
                 script {
                     sh "/var/jenkins_home/sonar/bin/sonar-scanner \
-                        -Dsonar.projectKey=grupo-05 \
-                        -Dsonar.projectName=grupo-05 \
+                        -Dsonar.projectKey=pipeline-jenkinsfile-grupo5 \
+                        -Dsonar.projectName=pipeline-jenkinsfile-grupo5 \
                         -Dsonar.scm.disabled=true \
                         -Dsonar.sources=. \
                         -Dsonar.language=java \
                         -Dsonar.java.binaries=./target/classes \
                         -Dsonar.sourceEncoding=UTF-8 \
-                        -Dsonar.host.url=https://ae1a-186-105-120-165.ngrok-free.app \
+                        -Dsonar.host.url=http://localhost:9000 \
                         -Dsonar.exclusions=src/test/java/****/*.java \
-                        -Dsonar.login=squ_79146dd17e54d3df5f3e98170b18069c3c46de0b"
+                        -Dsonar.login=sqa_772b104141245276d89d4f82c9f5c221365b71a6"
                 }
             }
         }
