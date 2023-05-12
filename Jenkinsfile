@@ -40,7 +40,7 @@ pipeline {
                             groupId: pom.groupId,
                             version: pom.version,
                             repository: "pipeline-jenkinsfile-grupo5",
-                            credentialsId: "grupo_5",
+                            credentialsId: "nexus-id-cristobal",
                             artifacts: [
                                     [artifactId: pom.artifactId,
                                     classifier: '',
